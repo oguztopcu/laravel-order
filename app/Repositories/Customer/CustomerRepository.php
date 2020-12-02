@@ -10,9 +10,9 @@ class CustomerRepository extends Repository
 {
     protected $model = Customer::class;
 
-    public function paginate($perPage = 10)
+    public function paginate($companyId, $perPage = 10)
     {
-        return $this->model()->paginate($perPage);
+        return $this->model()->where('company_id', '=', $companyId)->paginate($perPage);
     }
 
     public function create(Request $request)
