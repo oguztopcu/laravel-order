@@ -32,7 +32,7 @@ class CustomerController extends Controller
     public function index()
     {
         return response()->json([
-            'data' => $this->customer->paginate()
+            'data' => $this->customer->paginate(auth()->user()->company->id)
         ]);
     }
 
