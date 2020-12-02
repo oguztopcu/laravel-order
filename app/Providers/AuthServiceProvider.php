@@ -28,6 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('check-company', [CustomerPolicy::class, 'checkCompany']);
+        Gate::define('customer-check-company', [CustomerPolicy::class, 'checkCompany']);
     }
 }
