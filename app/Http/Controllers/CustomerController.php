@@ -78,6 +78,8 @@ class CustomerController extends Controller
      */
     public function update(UpdateRequest $request, Customer $customer)
     {
+        $this->authorize('check-company', [$customer]);
+
         $updatedCustomer = $this->customer->update($customer, $request);
 
         return response()->json([
@@ -94,6 +96,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $this->authorize('check-company', [$customer]);
+
         $this->customer->delete($customer);
 
         return response()->json([
