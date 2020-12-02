@@ -40,4 +40,18 @@ class LoginController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
+
+    /**
+     * Kullanıcı sistemden çıkış yapar.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->logout();
+
+        return response()->json([
+            'message' => 'Hesabınızdan başarıyla çıkış yaptınız.'
+        ]);
+    }
 }
