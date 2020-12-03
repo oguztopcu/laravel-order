@@ -1,6 +1,6 @@
 # Laravel Order API
 
-Öncelikle, proje ana dizininde bulunan ve docker/ kalsörü içinde bulunan .env.example kopyalayarak yeni bir .env dosyası oluşturun.
+Öncelikle, proje ana dizininde bulunan ve docker/ klasörü içinde bulunan .env.example kopyalayarak yeni bir .env dosyası oluşturun ve düzenleyin.
 
 Docker ile çalıştırmak için proje içerisinde bulunan docker klasörüne giderek;
 ```
