@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Route::model('customerId', Customer::class);
         Route::model('productId', Product::class);
+        Route::model('orderCode', Order::class);
     }
 }
