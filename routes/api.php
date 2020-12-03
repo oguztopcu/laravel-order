@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,15 @@ Route::prefix('product')->group(function () {
     Route::put('/{productId}', [ProductController::class, 'update'])->name('api.product.update');
 
     Route::delete('/{productId}', [ProductController::class, 'destroy'])->name('api.product.destroy');
+});
+
+Route::prefix('order')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('api.order.index');
+
+    Route::post('/', [OrderController::class, 'store'])->name('api.order.store');
+
+    Route::get('/{orderCode}', [OrderController::class, 'show'])->name('api.order.show');
+    Route::put('/{orderCode}', [OrderController::class, 'update'])->name('api.order.update');
+
+    Route::delete('/{orderCode}', [OrderController::class, 'destroy'])->name('api.order.destroy');
 });
