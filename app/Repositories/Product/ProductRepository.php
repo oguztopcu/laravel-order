@@ -4,6 +4,7 @@ namespace App\Repositories\Product;
 
 use App\Models\Product;
 use App\Repositories\Repository;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ProductRepository extends Repository
@@ -20,6 +21,25 @@ class ProductRepository extends Repository
     public function paginate($companyId, $perPage = 10)
     {
         return $this->model()->where('company_id', '=', $companyId)->paginate($perPage);
+    }
+
+    /**
+     * Ürünlerin stok durumunu kontrol eder
+     *
+     * @param array $products
+     * @return bool
+     */
+    public function checkQuantity(array $products = [])
+    {
+        $prods = $this->model()->select(['id', 'stock'])->whereIn('id', collect($products)->keys()->toArray())->get();
+
+        foreach ($prods as $product) {
+            if ($products[$product->id] > $product->stock) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -63,5 +83,22 @@ class ProductRepository extends Repository
     public function delete(Product $product)
     {
         $product->delete();
+    }
+
+    /**
+     * Ürünlerin stoklarını düşürür.
+     *
+     * @param array $products
+     * @return bool
+     */
+    public function decrementStock(array $products)
+    {
+        $prods = $this->model()->select(['id', 'stock'])->whereIn('id', collect($products)->keys()->toArray())->get();
+
+        foreach ($prods as $product) {
+            $product->decrement('stock', (int) $products[$product->id]);
+        }
+
+        return true;
     }
 }
